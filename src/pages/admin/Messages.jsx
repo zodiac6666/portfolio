@@ -304,7 +304,6 @@ function ReplyDialog({ message, onClose }) {
     `Hi ${message.name},\n\n\n-------- Original message --------\n${message.message}`,
   )
   const [copied, setCopied] = useState(false)
-  const [launching, setLaunching] = useState(false)
 
   // Close on Escape
   useEffect(() => {
@@ -314,16 +313,6 @@ function ReplyDialog({ message, onClose }) {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
-
-  const openEmailApp = (e) => {
-    e.preventDefault()
-    const url =
-      `mailto:${message.email}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`
-    window.location.href = url
-    setLaunching(true)
-  }
 
   const copyEmail = async () => {
     try {
@@ -395,17 +384,20 @@ function ReplyDialog({ message, onClose }) {
           />
 
           {/* Actions */}
-          <div className="flex items-center gap-3 pt-1">
-            <button
-              onClick={openEmailApp}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#14B8A6] text-[#0B0C10] text-sm font-semibold px-4 py-2 hover:bg-[#2DD4BF] transition-colors cursor-pointer"
+          <div className="space-y-3 pt-1">
+            <a
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(message.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#14B8A6] text-[#0B0C10] text-sm font-semibold px-4 py-2 hover:bg-[#2DD4BF] transition-colors"
             >
               <Send size={14} />
-              Send in Email App
-            </button>
-            {launching && (
-              <span className="text-xs text-[#6B7280]">Opening your email app…</span>
-            )}
+              Send via Gmail
+            </a>
+            <p className="text-xs text-[#6B7280]">
+              Opens Gmail in a new tab with the reply ready &mdash; just press Send
+              there.
+            </p>
           </div>
         </div>
       </div>
