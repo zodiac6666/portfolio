@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Mail, MailOpen, Trash2, AlertCircle, Inbox, ChevronDown,
+  AlertCircle, Check, ChevronDown, Copy, Inbox, Mail, MailOpen, Send, Trash2, X,
 } from 'lucide-react'
 import { getMessages, deleteMessage } from '../../utils/api'
 import { cn } from '../../utils/cn'
@@ -19,6 +19,8 @@ export function Messages() {
   const [expanded, setExpanded] = useState(new Set())
   // Delete-confirmation state: which message ID is awaiting confirm
   const [confirmingDelete, setConfirmingDelete] = useState(null)
+  // Reply dialog state: the message currently being replied to (or null)
+  const [replyingTo, setReplyingTo] = useState(null)
 
   // ---- Data fetching ----
   const fetchMessages = useCallback(async () => {
@@ -223,13 +225,13 @@ export function Messages() {
 
                     {/* Actions */}
                     <div className="flex items-center gap-3">
-                      <a
-                        href={`mailto:${msg.email}`}
-                        className="inline-flex items-center gap-2 rounded-lg border border-[#2E3340] text-[#E8E9ED] text-xs px-3 py-2 hover:border-[#14B8A6] hover:text-[#14B8A6] transition-colors"
+                      <button
+                        onClick={() => setReplyingTo(msg)}
+                        className="inline-flex items-center gap-2 rounded-lg border border-[#2E3340] text-[#E8E9ED] text-xs px-3 py-2 hover:border-[#14B8A6] hover:text-[#14B8A6] transition-colors cursor-pointer"
                       >
                         <Mail size={14} />
                         Reply
-                      </a>
+                      </button>
 
                       {/* Delete — two-step confirm */}
                       <button
@@ -252,6 +254,11 @@ export function Messages() {
           )
         })}
       </div>
+
+      {/* Reply compose dialog */}
+      {replyingTo && (
+        <ReplyDialog message={replyingTo} onClose={() => setReplyingTo(null)} />
+      )}
     </div>
   )
 }
@@ -278,4 +285,130 @@ function formatDate(dateStr) {
     day: 'numeric',
     year: d.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
   })
+}
+
+const replyFieldCls =
+  'w-full bg-[#0B0C10] border border-[#2E3340] rounded-lg px-3 py-2.5 text-sm text-[#E8E9ED] placeholder-[#6B7280] outline-none focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] transition-all duration-200'
+
+/**
+ * ReplyDialog — in-app compose box for replying to a message.
+ *
+ * Instead of jumping straight to a bare mailto: (which silently does nothing
+ * when no email app is configured), it shows a compose form and then opens the
+ * user's email app with everything pre-filled. A "Copy email" fallback is
+ * always available too.
+ */
+function ReplyDialog({ message, onClose }) {
+  const [subject, setSubject] = useState(`Re: Contact from ${message.name}`)
+  const [body, setBody] = useState(
+    `Hi ${message.name},\n\n\n-------- Original message --------\n${message.message}`,
+  )
+  const [copied, setCopied] = useState(false)
+  const [launching, setLaunching] = useState(false)
+
+  // Close on Escape
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  const openEmailApp = (e) => {
+    e.preventDefault()
+    const url =
+      `mailto:${message.email}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`
+    window.location.href = url
+    setLaunching(true)
+  }
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(message.email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard unavailable — ignore; the address is visible on screen.
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Reply to ${message.name}`}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+
+      {/* Panel */}
+      <div className="relative w-full max-w-lg rounded-2xl border border-[#2E3340] bg-[#11131A] shadow-2xl">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#2E3340]">
+          <h2 className="font-display text-base font-bold text-[#E8E9ED]">
+            Reply to {message.name}
+          </h2>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="text-[#6B7280] hover:text-[#E8E9ED] transition-colors p-1 cursor-pointer"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="p-5 space-y-4">
+          {/* To + copy */}
+          <div className="rounded-lg bg-[#0B0C10] border border-[#2E3340] px-3 py-2.5 flex items-center justify-between gap-3">
+            <span className="text-xs text-[#6B7280] font-mono truncate">
+              To: <span className="text-[#E8E9ED]">{message.email}</span>
+            </span>
+            <button
+              onClick={copyEmail}
+              className="inline-flex items-center gap-1.5 text-xs text-[#14B8A6] hover:text-[#2DD4BF] transition-colors flex-shrink-0 cursor-pointer"
+            >
+              {copied ? <Check size={12} /> : <Copy size={12} />}
+              {copied ? 'Copied' : 'Copy'}
+            </button>
+          </div>
+
+          {/* Subject */}
+          <input
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Subject"
+            autoFocus
+            className={replyFieldCls}
+          />
+
+          {/* Body */}
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            rows={7}
+            placeholder="Write your reply…"
+            className={`${replyFieldCls} resize-y leading-relaxed`}
+          />
+
+          {/* Actions */}
+          <div className="flex items-center gap-3 pt-1">
+            <button
+              onClick={openEmailApp}
+              className="inline-flex items-center gap-2 rounded-lg bg-[#14B8A6] text-[#0B0C10] text-sm font-semibold px-4 py-2 hover:bg-[#2DD4BF] transition-colors cursor-pointer"
+            >
+              <Send size={14} />
+              Send in Email App
+            </button>
+            {launching && (
+              <span className="text-xs text-[#6B7280]">Opening your email app…</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
