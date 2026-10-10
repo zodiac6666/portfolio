@@ -54,7 +54,13 @@ export function Contact() {
       setStatus('success')
     } catch (err) {
       setStatus('error')
-      setServerError(err.message || 'Something went wrong. Please try again.')
+      // The GitHub Pages build is static, so the PHP form endpoint doesn't
+      // exist there — point visitors at email instead of a raw error.
+      setServerError(
+        import.meta.env.PROD
+          ? 'This online demo can\u2019t send messages directly \u2014 please email me at yahyabaji0374@gmail.com instead.'
+          : err.message || 'Something went wrong. Please try again.'
+      )
     }
   }
 

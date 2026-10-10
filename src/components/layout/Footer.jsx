@@ -16,7 +16,7 @@ export function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/zodiac6666"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -25,7 +25,7 @@ export function Footer() {
             <GitFork size={18} />
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://linkedin.com/in/zodiac6666"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -49,7 +49,7 @@ export function Footer() {
             Open to full-stack opportunities
           </p>
           <a
-            href="/admin/login"
+            href={`${import.meta.env.BASE_URL}admin/login`}
             className="text-[#6B7280]/50 hover:text-[#6B7280] text-xs transition-colors flex items-center gap-1"
             aria-label="Admin login"
           >

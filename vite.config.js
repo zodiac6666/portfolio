@@ -2,7 +2,10 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  // Local dev serves from "/", but the production build is hosted on
+  // GitHub Pages as a project site: https://zodiac6666.github.io/portfolio/
+  base: mode === 'production' ? '/portfolio/' : '/',
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
@@ -14,4 +17,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

@@ -97,7 +97,7 @@ export function Hero() {
             style={{ animationDelay: '0.8s', animationFillMode: 'both' }}
           >
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/zodiac6666"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -106,7 +106,7 @@ export function Hero() {
               <GitFork size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/zodiac6666"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
