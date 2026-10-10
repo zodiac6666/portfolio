@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0B0C10;
+  --color-bg-secondary: #12141A;
+  --color-bg-surface: #1A1D26;
+  --color-bg-muted: #242832;
+  --color-text-primary: #E8E9ED;
+  --color-text-secondary: #9AA0AB;
+  --color-text-muted: #6B7280;
+  --color-accent: #14B8A6;
+  --color-accent-dark: #0D9488;
+  --color-accent-2: #2DD4BF;
+  --color-line: #2E3340;
+  --color-line-soft: #363B47;
+  --color-success: #34D399;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #0B0C10;
+  color: #E8E9ED;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll-reveal animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Disable all transitions and animations for users who prefer reduced motion */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom keyframes */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/*
+  Both classes start the element invisible (via the keyframe from-state)
+  but immediately begin animating — so there's no flash of hidden content.
+  animation-fill-mode: both means the from-state applies before the delay fires.
+  We add a tiny base opacity so the element is never fully invisible if JS is slow.
+*/
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease both;
+}
+
+/* Dot grid motif */
+.dot-grid {
+  background-image: radial-gradient(circle, #2E3340 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Accent underline on nav links */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #14B8A6;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0B0C10; }
+::-webkit-scrollbar-thumb { background: #2E3340; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #14B8A6; }

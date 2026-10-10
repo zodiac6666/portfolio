@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Backend config (contains credentials)
+backend/api/config.php
+backend/api/.htaccess
+
+# One-time admin bootstrap script — never ship this
+backend/api/setup-admin.php
+
+# Environment files
+.env
+.env.local
+.env.*.local
