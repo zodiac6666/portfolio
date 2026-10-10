@@ -1,5 +1,6 @@
 ﻿// src/components/layout/Footer.jsx
-import { ExternalLink, GitFork, Mail, Shield } from 'lucide-react'
+import { Mail, Shield } from 'lucide-react'
+import { GitHubIcon, LinkedInIcon } from '../ui/SocialIcons'
 
 export function Footer() {
   return (
@@ -22,7 +23,7 @@ export function Footer() {
             aria-label="GitHub"
             className="text-[#6B7280] hover:text-[#E8E9ED] transition-colors p-2 rounded-md hover:bg-[#1A1D26]"
           >
-            <GitFork size={18} />
+            <GitHubIcon size={18} />
           </a>
           <a
             href="https://linkedin.com/in/zodiac6666"
@@ -31,7 +32,7 @@ export function Footer() {
             aria-label="LinkedIn"
             className="text-[#6B7280] hover:text-[#E8E9ED] transition-colors p-2 rounded-md hover:bg-[#1A1D26]"
           >
-            <ExternalLink size={18} />
+            <LinkedInIcon size={18} />
           </a>
           <a
             href="mailto:yahyabaji0374@gmail.com"

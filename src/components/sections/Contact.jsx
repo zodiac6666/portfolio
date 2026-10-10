@@ -1,6 +1,7 @@
 ﻿// src/components/sections/Contact.jsx
 import { useState } from 'react'
-import { AlertCircle, CheckCircle2, ExternalLink, GitFork, Loader2, Mail, Send } from 'lucide-react'
+import { AlertCircle, CheckCircle2, Loader2, Mail, Send } from 'lucide-react'
+import { GitHubIcon, LinkedInIcon } from '../ui/SocialIcons'
 import { FadeIn } from '../ui/FadeIn'
 import { Button } from '../ui/Button'
 import { submitContact } from '../../utils/api'
@@ -211,8 +212,8 @@ export function Contact() {
                 Find me on
               </p>
               {[
-                { icon: GitFork,    label: 'GitHub',   sub: 'github.com/zodiac6666',          href: 'https://github.com/zodiac6666'          },
-                { icon: ExternalLink, label: 'LinkedIn', sub: 'linkedin.com/in/zodiac6666',    href: 'https://linkedin.com/in/zodiac6666'      },
+                { icon: GitHubIcon,    label: 'GitHub',   sub: 'github.com/zodiac6666',          href: 'https://github.com/zodiac6666'          },
+                { icon: LinkedInIcon,  label: 'LinkedIn', sub: 'linkedin.com/in/zodiac6666',    href: 'https://linkedin.com/in/zodiac6666'      },
                 { icon: Mail,       label: 'Email',     sub: 'yahyabaji0374@gmail.com',        href: 'mailto:yahyabaji0374@gmail.com'                    },
               ].map(({ icon: Icon, label, sub, href }) => (
                 <a

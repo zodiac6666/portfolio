@@ -1,6 +1,7 @@
 // src/components/sections/Hero.jsx
 import { useState } from 'react'
-import { ArrowDown, Download, ExternalLink, FolderOpen, GitFork, Mail } from 'lucide-react'
+import { ArrowDown, Download, FolderOpen, Mail } from 'lucide-react'
+import { GitHubIcon, LinkedInIcon } from '../ui/SocialIcons'
 import { Button } from '../ui/Button'
 import { useTypewriter } from '../../hooks/useTypewriter'
 
@@ -103,7 +104,7 @@ export function Hero() {
               aria-label="GitHub"
               className="text-[#6B7280] hover:text-[#E8E9ED] transition-colors"
             >
-              <GitFork size={20} />
+              <GitHubIcon size={20} />
             </a>
             <a
               href="https://linkedin.com/in/zodiac6666"
@@ -112,7 +113,7 @@ export function Hero() {
               aria-label="LinkedIn"
               className="text-[#6B7280] hover:text-[#E8E9ED] transition-colors"
             >
-              <ExternalLink size={20} />
+              <LinkedInIcon size={20} />
             </a>
 
             <span className="w-px h-4 bg-[#2E3340]" aria-hidden="true" />
