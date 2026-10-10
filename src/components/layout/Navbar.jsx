@@ -5,6 +5,7 @@ import { navItems } from '../../data/navItems'
 import { useScrollSpy } from '../../hooks/useScrollSpy'
 import { cn } from '../../utils/cn'
 import { RollingText } from '../ui/RollingText'
+import { Logo } from '../ui/Logo'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -37,13 +38,7 @@ export function Navbar() {
       >
         <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="#"
-            className="font-mono text-sm font-medium text-[#14B8A6] tracking-tight hover:text-[#2DD4BF] transition-colors"
-            aria-label="YahyaBaji — back to top"
-          >
-            YahyaBaji
-          </a>
+          <Logo />
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-8" role="list">
