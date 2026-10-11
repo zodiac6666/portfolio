@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Favicon preview — pick one</title>
+<style>
+  body { margin: 0; background: #0B0C10; color: #E8E9ED;
+         font-family: 'Segoe UI', Arial, sans-serif; padding: 40px 24px; }
+  h1 { font-size: 22px; margin: 0 0 6px; color: #14B8A6; }
+  p.sub { color: #6B7280; margin: 0 0 30px; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 16px; max-width: 1050px; }
+  .card { background: #1A1D26; border: 1px solid #2E3340; border-radius: 14px;
+          padding: 22px 16px; text-align: center; }
+  .card:hover { border-color: #14B8A6; }
+  .icon { width: 88px; height: 88px; display: block; margin: 0 auto 6px; }
+  .tabsize { display: flex; align-items: center; justify-content: center; gap: 8px;
+             margin: 8px 0 12px; color: #6B7280; font-size: 11px; }
+  .tab { width: 20px; height: 20px; }
+  b.lbl { font-size: 15px; display: block; }
+  .desc { color: #6B7280; font-size: 12px; margin: 5px 0 0;
+          line-height: 1.45; min-height: 34px; }
+  .ltr { display: inline-block; width: 24px; height: 24px; line-height: 24px;
+         border-radius: 6px; background: #14B8A6; color: #0B0C10;
+         font-weight: 700; font-size: 13px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+  <h1>Choose your new favicon 👇</h1>
+  <p class="sub">Each one is shown large, plus how it looks in the browser tab. Tell me the letter you like (e.g. &ldquo;C&rdquo;).</p>
+
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <!-- A: Turquoise box + white Y (your pick) -->
+      <svg id="fa" viewBox="0 0 64 64">
+        <defs>
+          <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2DD4BF" /><stop offset="1" stop-color="#0D9488" />
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" fill="url(#ga)" />
+        <path d="M21 20 L31 34 M43 20 L31 34 M31 34 L31 46"
+          stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round" fill="none" />
+      </svg>
+
+      <!-- B: Y badge -->
+      <svg id="fb" viewBox="0 0 64 64">
+        <rect x="2" y="2" width="60" height="60" rx="16" fill="#0D1017" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="#14B8A6" stroke-width="2.5" />
+        <path d="M20 18 L31 32 M42 18 L31 32 M31 32 L31 45"
+          stroke="#14B8A6" stroke-width="8" stroke-linecap="round" fill="none" />
+      </svg>
+
+      <!-- C: Code brackets -->
+      <svg id="fc" viewBox="0 0 64 64">
+        <rect x="2" y="2" width="60" height="60" rx="16" fill="#0D1017" />
+        <g stroke="#14B8A6" stroke-width="6" stroke-linecap="round" fill="none">
+          <path d="M42 15 L29 32 L42 49" />
+          <path d="M37 14 L31 50" />
+          <path d="M22 15 L35 32 L22 49" />
+        </g>
+      </svg>
+
+      <!-- D: Terminal prompt -->
+      <svg id="fd" viewBox="0 0 64 64">
+        <rect x="2" y="2" width="60" height="60" rx="16" fill="#0D1017" />
+        <g stroke="#14B8A6" stroke-width="6" stroke-linecap="round" fill="none">
+          <path d="M27 20 L40 32 L27 44" />
+          <path d="M19 50 L45 50" />
+        </g>
+      </svg>
+
+      <!-- E: Dot + ring -->
+      <svg id="fe" viewBox="0 0 64 64">
+        <defs>
+          <radialGradient id="ge" cx="0.35" cy="0.3" r="0.75">
+            <stop offset="0" stop-color="#2DD4BF" /><stop offset="1" stop-color="#0D9488" />
+          </radialGradient>
+        </defs>
+        <circle cx="32" cy="32" r="15" fill="url(#ge)" />
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#14B8A6" stroke-opacity="0.55" stroke-width="4" />
+      </svg>
+
+      <!-- F: Y token -->
+      <svg id="ff" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="27" fill="#0D1017" stroke="#14B8A6" stroke-width="4" />
+        <path d="M25 23 L32 33 M39 23 L32 33 M32 33 L32 43"
+          stroke="#14B8A6" stroke-width="6" stroke-linecap="round" fill="none" />
+      </svg>
+    </defs>
+  </svg>
+
+  <div class="grid">
+    <div class="card"><span class="ltr">A</span><svg class="icon"><use href="#fa"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#fa"/></svg></div>
+      <b class="lbl">A — Your pick</b><p class="desc">Turquoise box with a white letter Y — this is the new favicon.</p></div>
+
+    <div class="card"><span class="ltr">B</span><svg class="icon"><use href="#fb"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#fb"/></svg></div>
+      <b class="lbl">Y badge</b><p class="desc">Y inside a dark rounded square with a turquoise ring.</p></div>
+
+    <div class="card"><span class="ltr">C</span><svg class="icon"><use href="#fc"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#fc"/></svg></div>
+      <b class="lbl">Code bracket</b><p class="desc">The classic developer `&lt;/&gt;` symbol on a dark tile.</p></div>
+
+    <div class="card"><span class="ltr">D</span><svg class="icon"><use href="#fd"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#fd"/></svg></div>
+      <b class="lbl">Terminal</b><p class="desc">A terminal prompt &ldquo;&gt;_&rdquo; on a dark tile.</p></div>
+
+    <div class="card"><span class="ltr">E</span><svg class="icon"><use href="#fe"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#fe"/></svg></div>
+      <b class="lbl">Dot + ring</b><p class="desc">A glowing turquoise dot with a thin ring around it.</p></div>
+
+    <div class="card"><span class="ltr">F</span><svg class="icon"><use href="#ff"/></svg>
+      <div class="tabsize">tab size <svg class="tab"><use href="#ff"/></svg></div>
+      <b class="lbl">Y token</b><p class="desc">Y inside a turquoise ring — like a badge/coin.</p></div>
+  </div>
+</body>
+</html>
